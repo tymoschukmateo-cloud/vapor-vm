@@ -404,8 +404,36 @@
     .cd-num { width: 64px; height: 64px; font-size: 1.6rem; }
     .calc-wrapper { grid-template-columns: 1fr; }
     .novedades-grid { grid-template-columns: 1fr; }
+    #stock-panel .sp-forms { grid-template-columns: 1fr; }
   }
+
+  /* ─── STOCK PANEL ─── */
+  #stock-panel { padding: 80px 0; background: var(--dark); }
+  #stock-panel .section-label { color: #6ee09e; }
+  .stock-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; margin: 32px 0 40px; }
+  .stock-card { background: var(--dark-2); border: 2px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 18px; transition: border-color .2s; }
+  .stock-card.warning { border-color: #f59e0b; }
+  .stock-card.out { border-color: #dc2626; opacity: .8; }
+  .stock-card-name { color: rgba(255,255,255,.75); font-size: .8rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; letter-spacing: .04em; }
+  .stock-num { font-size: 2.4rem; font-weight: 900; color: #6ee09e; line-height: 1; }
+  .stock-num.warning { color: #fbbf24; }
+  .stock-num.out { color: #6b7280; }
+  .stock-label { font-size: .72rem; color: rgba(255,255,255,.35); margin-top: 4px; }
+  .stock-warn { font-size: .72rem; color: #fbbf24; font-weight: 700; margin-top: 8px; }
+  .stock-out-badge { display: inline-block; background: #dc2626; color: #fff; font-size: .68rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 8px; letter-spacing: .04em; }
+  .sp-forms { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .sp-form { background: var(--dark-2); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius-lg); padding: 28px; }
+  .sp-form-title { color: #fff; font-size: 1rem; font-weight: 700; margin-bottom: 20px; }
+  .sp-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+  .sp-field label { color: rgba(255,255,255,.5); font-size: .78rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+  .sp-field select, .sp-field input[type="number"] { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: 8px; color: #fff; padding: 10px 14px; font-size: .9rem; font-family: inherit; width: 100%; outline: none; }
+  .sp-field select:focus, .sp-field input[type="number"]:focus { border-color: var(--green-light); }
+  .sp-field select option { background: #122918; }
+  .sp-msg { margin-top: 12px; font-size: .85rem; font-weight: 600; padding: 9px 14px; border-radius: 8px; display: none; }
+  .sp-msg.ok { background: rgba(26,122,60,.25); color: #6ee09e; display: block; }
+  .sp-msg.err { background: rgba(220,38,38,.18); color: #fca5a5; display: block; }
 </style>
+<script src="productos.js"></script>
 </head>
 <body>
 
@@ -1220,6 +1248,45 @@
   </div>
 </section>
 
+<!-- ══ STOCK PANEL ══ -->
+<section id="stock-panel">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:0;">
+      <div class="section-label">GESTIÓN INTERNA</div>
+      <h2 class="section-title" style="color:#fff">Control de <span style="color:var(--green-light)">Stock</span></h2>
+    </div>
+    <div class="stock-grid" id="stock-grid"></div>
+    <div class="sp-forms">
+      <div class="sp-form">
+        <div class="sp-form-title">📦 Registrar Venta</div>
+        <div class="sp-field">
+          <label>Producto</label>
+          <select id="venta-prod"></select>
+        </div>
+        <div class="sp-field">
+          <label>Cantidad</label>
+          <input type="number" id="venta-qty" value="1" min="1">
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="registrarVenta()">Registrar venta</button>
+        <div class="sp-msg" id="venta-msg"></div>
+      </div>
+      <div class="sp-form">
+        <div class="sp-form-title">➕ Cargar Mercadería</div>
+        <div class="sp-field">
+          <label>Producto</label>
+          <select id="carga-prod"></select>
+        </div>
+        <div class="sp-field">
+          <label>Cantidad a agregar</label>
+          <input type="number" id="carga-qty" value="1" min="1">
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="cargarStock()">Cargar stock</button>
+        <div class="sp-msg" id="carga-msg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══ FOOTER ══ -->
 <footer>
   <div class="container">
@@ -1524,6 +1591,96 @@ calcUpdate();
   }
   draw();
 })();
+
+// ── STOCK MANAGEMENT ──────────────────────────────────────────────────────────
+const STOCK_KEY = 'vaporvm_stock';
+
+function getStock() {
+  const saved = localStorage.getItem(STOCK_KEY);
+  if (saved) return JSON.parse(saved);
+  const s = {};
+  PRODUCTOS.forEach(p => { s[p.id] = p.stock; });
+  return s;
+}
+
+function saveStock(s) {
+  localStorage.setItem(STOCK_KEY, JSON.stringify(s));
+}
+
+function rendStock() {
+  const s = getStock();
+  const grid = document.getElementById('stock-grid');
+  if (!grid) return;
+  grid.innerHTML = PRODUCTOS.map(p => {
+    const qty = s[p.id] ?? p.stock;
+    const isOut = qty === 0;
+    const isWarn = qty > 0 && qty <= 3;
+    return `<div class="stock-card${isOut ? ' out' : isWarn ? ' warning' : ''}">
+      <div class="stock-card-name">${p.nom}</div>
+      <div class="stock-num${isOut ? ' out' : isWarn ? ' warning' : ''}">${qty}</div>
+      <div class="stock-label">unidades</div>
+      ${isWarn ? '<div class="stock-warn">⚠ Stock bajo</div>' : ''}
+      ${isOut ? '<div class="stock-out-badge">SIN STOCK</div>' : ''}
+    </div>`;
+  }).join('');
+}
+
+function fillSelects() {
+  const opts = PRODUCTOS.map(p => `<option value="${p.id}">${p.nom}</option>`).join('');
+  document.getElementById('venta-prod').innerHTML = opts;
+  document.getElementById('carga-prod').innerHTML = opts;
+}
+
+function showMsg(id, text, type) {
+  const el = document.getElementById(id);
+  el.textContent = text;
+  el.className = `sp-msg ${type}`;
+  setTimeout(() => { el.className = 'sp-msg'; }, 3500);
+}
+
+function registrarVenta() {
+  const pid = document.getElementById('venta-prod').value;
+  const qty = parseInt(document.getElementById('venta-qty').value) || 0;
+  if (qty < 1) return;
+  const s = getStock();
+  const p = PRODUCTOS.find(x => x.id === pid);
+  const actual = s[pid] ?? p.stock;
+  if (actual === 0) {
+    showMsg('venta-msg', 'Sin stock — no se puede registrar la venta', 'err');
+    return;
+  }
+  if (qty > actual) {
+    showMsg('venta-msg', `Stock insuficiente — disponible: ${actual}`, 'err');
+    return;
+  }
+  s[pid] = actual - qty;
+  saveStock(s);
+  rendStock();
+  document.getElementById('venta-qty').value = 1;
+  const nuevo = s[pid];
+  let msg = `✓ Venta registrada — quedan ${nuevo} ud. de ${p.nom}`;
+  if (nuevo === 0) msg = `✓ Registrada — ${p.nom} quedó sin stock`;
+  else if (nuevo <= 3) msg = `✓ Registrada — ⚠ solo quedan ${nuevo} unidades`;
+  showMsg('venta-msg', msg, 'ok');
+}
+
+function cargarStock() {
+  const pid = document.getElementById('carga-prod').value;
+  const qty = parseInt(document.getElementById('carga-qty').value) || 0;
+  if (qty < 1) return;
+  const s = getStock();
+  const p = PRODUCTOS.find(x => x.id === pid);
+  s[pid] = (s[pid] ?? p.stock) + qty;
+  saveStock(s);
+  rendStock();
+  document.getElementById('carga-qty').value = 1;
+  showMsg('carga-msg', `✓ +${qty} unidades de ${p.nom} cargadas`, 'ok');
+}
+
+if (document.getElementById('stock-grid')) {
+  fillSelects();
+  rendStock();
+}
 </script>
 
 
