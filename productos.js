@@ -14,9 +14,9 @@ const WHATSAPP = '5493534171117';
 //   productos: ids a los que aplica, ej: ['trio', 'pod_kit']. Vacío = todos.
 // Cuando la fecha pasa, o si texto queda vacío, la oferta se apaga sola.
 const OFERTA = {
-  texto:     '',
-  termina:   '',
-  descuento: 0,
+  texto:     '5% OFF en todos los productos',
+  termina:   '2026-10-15',
+  descuento: 5,
   productos: [],
 };
 
