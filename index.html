@@ -288,14 +288,17 @@
   .prod-img svg { width:56px; height:56px; opacity:.45; }
   .prod-body { padding:24px; display:flex; flex-direction:column; flex:1; }
   .prod-body h3 { font-size:1.15rem; font-weight:800; color:var(--text); margin-bottom:4px; }
-  .prod-from { font-size:.82rem; color:var(--text-2); margin-bottom:16px; }
-  .prod-from strong { color:var(--green); font-size:1.05rem; }
-  .prod-tiers { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-bottom:18px; }
-  .prod-tier { border:1px solid var(--border); border-radius:10px; padding:8px 2px; text-align:center; transition:all .2s; }
-  .prod-tier span { display:block; font-size:.68rem; font-weight:700; color:var(--text-2); letter-spacing:.06em; }
-  .prod-tier b { display:block; font-size:.78rem; font-weight:800; color:var(--text); margin-top:2px; }
-  .prod-tier.active { border-color:var(--green); background:var(--green-soft); }
-  .prod-tier.active span, .prod-tier.active b { color:var(--green); }
+  .prod-oferta { align-self:flex-start; background:var(--dark); color:#fff; font-size:.72rem; font-weight:800; letter-spacing:.04em; padding:6px 12px; border-radius:8px; margin:4px 0 10px; }
+  .prod-precio { display:flex; align-items:baseline; flex-wrap:wrap; gap:4px 10px; margin:8px 0 12px; }
+  .prod-tachado { color:var(--text-2); font-size:1rem; font-weight:600; text-decoration:line-through; }
+  .prod-grande { color:var(--green); font-size:1.75rem; font-weight:900; letter-spacing:-.03em; line-height:1.1; }
+  .prod-cu { color:var(--text-2); font-size:.82rem; font-weight:600; }
+  .prod-ahorro { background:var(--green); color:#fff; font-size:.72rem; font-weight:800; padding:4px 10px; border-radius:50px; white-space:nowrap; }
+  .prod-mas { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px; }
+  .prod-mas-item { border:1px solid var(--border); border-radius:10px; padding:6px 10px; font-size:.78rem; color:var(--text-2); transition:all .2s; }
+  .prod-mas-item b { color:var(--text); font-weight:800; margin:0 2px; }
+  .prod-mas-item span { color:var(--green); font-weight:700; }
+  .prod-mas-item.active { border-color:var(--green); background:var(--green-soft); }
   .prod-buy { display:flex; gap:10px; align-items:center; margin-top:auto; }
   .qty { display:flex; align-items:center; border:1px solid var(--border); border-radius:50px; overflow:hidden; flex-shrink:0; background:#fff; }
   .qty button { width:36px; height:42px; border:none; background:none; font-size:1.15rem; font-weight:700; color:var(--green); cursor:pointer; font-family:inherit; }
@@ -335,6 +338,8 @@
   .cart-item-bottom .qty button { height:36px; width:32px; }
   .cart-item-bottom .qty input { height:36px; }
   .cart-item-sub { font-weight:800; color:var(--text); font-size:1rem; }
+  .cart-save { margin-top:8px; color:var(--green); font-size:.82rem; font-weight:700; }
+  .cart-save-total { color:var(--green); font-size:.85rem; font-weight:700; margin-top:4px; }
   .cart-hint { margin-top:10px; background:var(--green-soft); color:var(--green); border-radius:8px; padding:8px 12px; font-size:.8rem; font-weight:600; }
   .cart-foot { border-top:1px solid var(--border); padding:20px 24px calc(20px + env(safe-area-inset-bottom)); background:var(--bg-2); }
   .cart-foot[hidden] { display:none; }
@@ -949,6 +954,7 @@
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-foot" id="cartFoot">
     <div class="cart-total"><span>Total</span><strong id="cartTotal">$0</strong></div>
+    <div class="cart-save-total" id="cartSaveTotal" hidden></div>
     <div class="cart-units" id="cartUnits"></div>
     <button type="button" class="btn btn-primary cart-checkout" onclick="finalizarPedido()">
       <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
@@ -1052,8 +1058,11 @@ if (window.ResizeObserver) new ResizeObserver(ajustarNav).observe(topbar);
 const ofertaFin = OFERTA.texto && /^\d{4}-\d{2}-\d{2}$/.test(OFERTA.termina)
   ? new Date(OFERTA.termina + 'T23:59:59-03:00') : null;   // Argentina: UTC-3 todo el año
 let cdTimer;
+var tiendaLista = false;   // se pone en true cuando la tienda ya se dibujó
+const ofertaVigente = () => !!ofertaFin && Date.now() < ofertaFin;
 function terminarOferta() {
   clearInterval(cdTimer);
+  if (tiendaLista) { renderProductos(); renderCarrito(); }   // vuelven los precios normales
   document.getElementById('countdown-section').hidden = true;
   document.getElementById('tbText').textContent = '🔥 Llevando 5 o más, pagás menos por unidad';
   const btn = document.getElementById('tbBtn');
@@ -1135,7 +1144,18 @@ const prodById = Object.fromEntries(PRODUCTOS.map(p => [p.id, p]));
 const fmtARS = n => '$' + Math.round(n).toLocaleString('es-AR');
 const escHTML = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const tierDe = qty => qty >= 20 ? 20 : qty >= 10 ? 10 : qty >= 5 ? 5 : 1;
-const precioUnit = (p, qty) => p.px[tierDe(qty)];
+// Oferta activa para este producto (de productos.js → OFERTA), o null.
+function ofertaDe(p) {
+  if (!ofertaVigente()) return null;
+  if (OFERTA.productos && OFERTA.productos.length && !OFERTA.productos.includes(p.id)) return null;
+  return { pct: Math.max(0, Math.min(90, Number(OFERTA.descuento) || 0)) };
+}
+// Precio por unidad de un escalón, con el descuento de la oferta si corresponde.
+const precioTier = (p, t) => { const o = ofertaDe(p); return o && o.pct ? Math.round(p.px[t] * (1 - o.pct / 100)) : p.px[t]; };
+const precioUnit = (p, qty) => precioTier(p, tierDe(qty));
+// Ahorro frente a comprar al precio x1 de lista.
+const ahorroPct = (p, unit) => Math.round((1 - unit / p.px[1]) * 100);
+const ahorroDe = (p, qty) => (p.px[1] - precioUnit(p, qty)) * qty;
 const sigTier = qty => TIERS.find(t => t > qty);
 const leerQty = v => Math.max(1, Math.min(999, parseInt(v, 10) || 1));
 
@@ -1150,10 +1170,7 @@ function renderProductos() {
         : IMG_PLACEHOLDER}</div>
       <div class="prod-body">
         <h3>${escHTML(p.nombre)}</h3>
-        <div class="prod-from">Desde <strong>${fmtARS(p.px[20])}</strong> c/u llevando 20+</div>
-        <div class="prod-tiers">${TIERS.map(t => `
-          <div class="prod-tier${t === 1 ? ' active' : ''}" data-tier="${t}"><span>x${t}</span><b>${fmtARS(p.px[t])}</b></div>`).join('')}
-        </div>
+        ${bloquePrecio(p)}
         <div class="prod-buy">
           <div class="qty">
             <button type="button" aria-label="Restar" onclick="cardQty('${p.id}', -1)">−</button>
@@ -1174,17 +1191,40 @@ function cardQty(id, d) {
   cardUpd(id);
 }
 
+// Precio destacado: x1 tachado y el mejor precio "de entrada" grande (x5, o el de la oferta),
+// con su % de ahorro; abajo los demás escalones con su ahorro frente al x1.
+function bloquePrecio(p) {
+  const o = ofertaDe(p);
+  const conDescuento = o && o.pct > 0;
+  const destacado = conDescuento ? 1 : 5;              // con oferta se destaca el precio x1 rebajado
+  const grande = precioTier(p, destacado);
+  const pct = ahorroPct(p, grande);
+  const resto = TIERS.filter(t => t > destacado);
+  return `${o ? `<div class="prod-oferta">🔥 OFERTA · ${escHTML(OFERTA.texto)}</div>` : ''}
+        <div class="prod-precio">
+          ${pct > 0 ? `<span class="prod-tachado">${fmtARS(p.px[1])}</span>` : ''}
+          <span class="prod-grande">${fmtARS(grande)}</span>
+          <span class="prod-cu">${conDescuento ? 'c/u en oferta' : 'c/u llevando 5'}</span>
+          ${pct > 0 ? `<span class="prod-ahorro">Ahorrás ${pct}%</span>` : ''}
+        </div>
+        <div class="prod-mas">${resto.map(t => {
+          const u = precioTier(p, t), a = ahorroPct(p, u);
+          return `<div class="prod-mas-item" data-tier="${t}">x${t} <b>${fmtARS(u)}</b>${a > 0 ? ` <span>-${a}%</span>` : ''}</div>`;
+        }).join('')}</div>`;
+}
+
 // Resalta el escalón que corresponde a la cantidad elegida y muestra el subtotal.
 function cardUpd(id, normalizar) {
   const p = prodById[id];
   const inp = document.getElementById('q-' + id);
   const qty = leerQty(inp.value);
   if (normalizar) inp.value = qty;
-  const t = tierDe(qty);
-  document.querySelectorAll(`.prod-card[data-id="${id}"] .prod-tier`).forEach(el =>
+  const t = tierDe(qty), unit = precioUnit(p, qty), ahorro = ahorroDe(p, qty);
+  document.querySelectorAll(`.prod-card[data-id="${id}"] .prod-mas-item`).forEach(el =>
     el.classList.toggle('active', +el.dataset.tier === t));
   document.getElementById('sub-' + id).innerHTML =
-    `${qty} u. × ${fmtARS(p.px[t])} = <strong>${fmtARS(p.px[t] * qty)}</strong>`;
+    `${qty} u. × ${fmtARS(unit)} = <strong>${fmtARS(unit * qty)}</strong>` +
+    (ahorro > 0 ? ` · <span style="color:var(--green);font-weight:700;">ahorrás ${fmtARS(ahorro)}</span>` : '');
 }
 
 // ── Carrito (se guarda en localStorage como { id: cantidad }) ──
@@ -1203,7 +1243,7 @@ function guardarCarrito() {
 function lineasCarrito() {
   return Object.keys(carrito).map(id => {
     const p = prodById[id], qty = carrito[id], unit = precioUnit(p, qty);
-    return { p, qty, unit, sub: unit * qty, tier: tierDe(qty) };
+    return { p, qty, unit, sub: unit * qty, tier: tierDe(qty), ahorro: ahorroDe(p, qty), oferta: !!(ofertaDe(p) && ofertaDe(p).pct) };
   });
 }
 
@@ -1233,6 +1273,7 @@ function renderCarrito() {
   const lineas = lineasCarrito();
   const unidades = lineas.reduce((s, l) => s + l.qty, 0);
   const total = lineas.reduce((s, l) => s + l.sub, 0);
+  const ahorroTotal = lineas.reduce((s, l) => s + l.ahorro, 0);
 
   const badge = document.getElementById('cartCount');
   badge.textContent = unidades;
@@ -1247,16 +1288,17 @@ function renderCarrito() {
     return;
   }
 
-  document.getElementById('cartItems').innerHTML = lineas.map(({ p, qty, unit, sub, tier }) => {
+  document.getElementById('cartItems').innerHTML = lineas.map(({ p, qty, unit, sub, tier, ahorro, oferta }) => {
     const sig = sigTier(qty);
     const faltan = sig ? sig - qty : 0;
     const hint = sig && faltan <= AVISO_FALTAN
-      ? `<div class="cart-hint">💡 Agregá ${faltan} más y pagás ${fmtARS(p.px[sig])} c/u</div>` : '';
+      ? `<div class="cart-hint">💡 Agregá ${faltan} más y pagás ${fmtARS(precioTier(p, sig))} c/u</div>` : '';
+    const save = ahorro > 0 ? `<div class="cart-save">✓ Estás ahorrando ${fmtARS(ahorro)}</div>` : '';
     return `<div class="cart-item">
       <div class="cart-item-top">
         <div>
           <div class="cart-item-name">${escHTML(p.nombre)}</div>
-          <div class="cart-item-unit">${fmtARS(unit)} c/u <span class="tag">x${tier}</span></div>
+          <div class="cart-item-unit">${fmtARS(unit)} c/u <span class="tag">${oferta ? 'Oferta · ' : ''}x${tier}</span></div>
         </div>
         <button type="button" class="cart-remove" onclick="quitarDelCarrito('${p.id}')">Eliminar</button>
       </div>
@@ -1268,11 +1310,14 @@ function renderCarrito() {
         </div>
         <div class="cart-item-sub">${fmtARS(sub)}</div>
       </div>
-      ${hint}
+      ${save}${hint}
     </div>`;
   }).join('');
   document.getElementById('cartTotal').textContent = fmtARS(total);
   document.getElementById('cartUnits').textContent = `${unidades} unidad${unidades === 1 ? '' : 'es'}`;
+  const st = document.getElementById('cartSaveTotal');
+  st.hidden = !(ahorroTotal > 0);
+  st.textContent = `Estás ahorrando ${fmtARS(ahorroTotal)} en total`;
 }
 
 function abrirCarrito() {
@@ -1305,9 +1350,11 @@ function mensajePedido() {
   const lineas = lineasCarrito();
   const total = lineas.reduce((s, l) => s + l.sub, 0);
   const unidades = lineas.reduce((s, l) => s + l.qty, 0);
+  const ahorro = lineas.reduce((s, l) => s + l.ahorro, 0);
   return 'Hola! Quiero hacer este pedido:\n\n' +
-    lineas.map(l => `• ${l.p.nombre} x${l.qty} — ${fmtARS(l.unit)} c/u = ${fmtARS(l.sub)}`).join('\n') +
-    `\n\nTotal: ${fmtARS(total)} (${unidades} unidad${unidades === 1 ? '' : 'es'})`;
+    lineas.map(l => `• ${l.p.nombre} x${l.qty} — ${fmtARS(l.unit)} c/u${l.oferta ? ' (oferta)' : ''} = ${fmtARS(l.sub)}`).join('\n') +
+    `\n\nTotal: ${fmtARS(total)} (${unidades} unidad${unidades === 1 ? '' : 'es'})` +
+    (ahorro > 0 ? `\nAhorro: ${fmtARS(ahorro)}` : '');
 }
 function finalizarPedido() {
   if (!Object.keys(carrito).length) return;
@@ -1333,6 +1380,7 @@ try { if (localStorage.getItem('vvm_edad') === 'no') mostrarEdadDenegada(); } ca
 renderProductos();
 cargarCarrito();
 renderCarrito();
+tiendaLista = true;
 
 // Hero particle network canvas
 (function() {

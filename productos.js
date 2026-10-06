@@ -9,10 +9,15 @@ const WHATSAPP = '5493534171117';
 // OFERTA con cuenta regresiva (se muestra arriba de Productos y en la barra superior).
 //   texto:   qué se ofrece, ej: '10% OFF en toda la línea Elfbar'
 //   termina: día en formato 'AAAA-MM-DD'; termina ese día a las 23:59 (hora de Argentina).
-// Cuando la fecha pasa, o si texto queda vacío, la sección se oculta sola.
+//   descuento: % que se descuenta del precio por cantidad mientras dure la oferta
+//              (0 = solo se muestra el aviso, los precios no cambian).
+//   productos: ids a los que aplica, ej: ['trio', 'pod_kit']. Vacío = todos.
+// Cuando la fecha pasa, o si texto queda vacío, la oferta se apaga sola.
 const OFERTA = {
-  texto:   '',
-  termina: '',
+  texto:     '',
+  termina:   '',
+  descuento: 0,
+  productos: [],
 };
 
 // px: precio POR UNIDAD según cuántas unidades de ese producto lleve el cliente.
