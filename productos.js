@@ -25,10 +25,10 @@ const OFERTA = {
 // imagen: nombre del archivo dentro de la carpeta img/ (ej: 'ice-king.webp').
 //   Si está vacío se muestra un placeholder.
 const PRODUCTOS = [
-  { id: 'elfbar_ice_king_40000', nombre: 'Elfbar Ice King 40000', imagen: 'elfbar-ice-king-pro-40000.webp', px: { 1: 24000, 5: 21500, 10: 21000, 20: 20500 } },
-  { id: 'bc_40k_pro',            nombre: 'BC 40K Pro',            imagen: 'elfbar-bc-pro-40k.webp', px: { 1: 18000, 5: 16000, 10: 15500, 20: 15000 } },
-  { id: 'elfbar_te30000',        nombre: 'Elfbar TE30000',        imagen: '', px: { 1: 22000, 5: 20000, 10: 19500, 20: 19000 } },
-  { id: 'trio',                  nombre: 'Trio',                  imagen: '', px: { 1: 23000, 5: 19500, 10: 19000, 20: 18500 } },
-  { id: 'funky_lands_ti7000',    nombre: 'Funky Lands Ti7000',    imagen: 'funky-lands-ti7000.webp', px: { 1: 11000, 5: 9500,  10: 9250,  20: 9000  } },
-  { id: 'pod_kit',               nombre: 'Pod Kit',               imagen: '', px: { 1: 18000, 5: 16000, 10: 15500, 20: 15000 } },
+  { id: 'elfbar_ice_king_40000', nombre: 'ELF BAR ICE KING 40K', imagen: '', px: { 1: 24000, 5: 21500, 10: 21000, 20: 20500 } },
+  { id: 'bc_40k_pro',            nombre: 'ELF BAR EB CREATE BC 40K PRO', imagen: 'elf-bar-eb-create-bc-40k-pro.webp', px: { 1: 18000, 5: 16000, 10: 15500, 20: 15000 } },
+  { id: 'elfbar_te30000',        nombre: 'ELF BAR TE 30K', imagen: '', px: { 1: 22000, 5: 20000, 10: 19500, 20: 19000 } },
+  { id: 'trio',                  nombre: 'ELF BAR TRIO 40K', imagen: '', px: { 1: 23000, 5: 19500, 10: 19000, 20: 18500 } },
+  { id: 'funky_lands_ti7000',    nombre: 'FUNKY LANDS TI 7000', imagen: 'funky-lands-ti-7000.webp', px: { 1: 11000, 5: 9500,  10: 9250,  20: 9000  } },
+  { id: 'pod_kit',               nombre: 'LIFE POD PRO 8K', imagen: 'life-pod-pro-8k.webp', px: { 1: 18000, 5: 16000, 10: 15500, 20: 15000 } },
 ];
