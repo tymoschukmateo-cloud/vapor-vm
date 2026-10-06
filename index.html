@@ -275,11 +275,6 @@
 
   /* ─── PRODUCTOS ─── */
   #productos { padding:120px 0; background:var(--bg-2); }
-  .descuentos { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:12px; }
-  .descuento { background:#fff; border:1px solid var(--border); border-radius:var(--radius); padding:16px; text-align:center; }
-  .descuento b { display:block; font-size:1.3rem; font-weight:900; color:var(--green); letter-spacing:-.02em; }
-  .descuento span { display:block; font-size:.8rem; font-weight:600; color:var(--text-2); margin-top:2px; }
-  .descuentos-nota { font-size:.82rem; color:var(--text-2); margin-bottom:32px; }
   .productos-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
   .prod-card { background:#fff; border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; display:flex; flex-direction:column; transition:all .3s; }
   .prod-card:hover { border-color:var(--green); box-shadow:0 8px 40px rgba(26,122,60,0.14); transform:translateY(-4px); }
@@ -401,7 +396,6 @@
     .cd-num { width: 64px; height: 64px; font-size: 1.6rem; }
     .calc-wrapper { grid-template-columns: 1fr; }
     .productos-grid { grid-template-columns: 1fr; }
-    .descuentos { grid-template-columns: repeat(2, 1fr); }
   }
 
 </style>
@@ -556,13 +550,6 @@
       </div>
       <button type="button" class="btn btn-secondary" onclick="abrirCarrito()">Ver carrito</button>
     </div>
-    <div class="descuentos reveal visible">
-      <div class="descuento"><b>x1</b><span>De 1 a 4 u.</span></div>
-      <div class="descuento"><b>x5</b><span>De 5 a 9 u.</span></div>
-      <div class="descuento"><b>x10</b><span>De 10 a 19 u.</span></div>
-      <div class="descuento"><b>x20</b><span>20 u. o más</span></div>
-    </div>
-    <p class="descuentos-nota">El precio por unidad baja según cuántas unidades lleves de cada producto. Cada tarjeta muestra el precio de cada escalón.</p>
     <div class="productos-grid" id="productosGrid"></div>
   </div>
 </section>
