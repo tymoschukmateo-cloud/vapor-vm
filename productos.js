@@ -27,8 +27,8 @@ const OFERTA = {
 const PRODUCTOS = [
   { id: 'elfbar_ice_king_40000', nombre: 'ELF BAR ICE KING 40K', imagen: 'elf-bar-ice-king-40k.webp', px: { 1: 24000, 5: 21500, 10: 21000, 20: 20500 } },
   { id: 'bc_40k_pro',            nombre: 'ELF BAR EB CREATE BC 40K PRO', imagen: 'elf-bar-eb-create-bc-40k-pro.webp', px: { 1: 18000, 5: 16000, 10: 15500, 20: 15000 } },
-  { id: 'elfbar_te30000',        nombre: 'ELF BAR TE 30K', imagen: '', px: { 1: 22000, 5: 20000, 10: 19500, 20: 19000 } },
-  { id: 'trio',                  nombre: 'ELF BAR TRIO 40K', imagen: '', px: { 1: 23000, 5: 19500, 10: 19000, 20: 18500 } },
+  { id: 'elfbar_te30000',        nombre: 'ELF BAR TE 30K', imagen: 'elf-bar-te-30k.webp', px: { 1: 22000, 5: 20000, 10: 19500, 20: 19000 } },
+  { id: 'trio',                  nombre: 'ELF BAR TRIO 40K', imagen: 'elf-bar-trio-40k.webp', px: { 1: 23000, 5: 19500, 10: 19000, 20: 18500 } },
   { id: 'funky_lands_ti7000',    nombre: 'FUNKY LANDS TI 7000', imagen: 'funky-lands-ti-7000.webp', px: { 1: 11000, 5: 9500,  10: 9250,  20: 9000  } },
   { id: 'pod_kit',               nombre: 'LIFE POD PRO 8K', imagen: 'life-pod-pro-8k.webp', px: { 1: 18000, 5: 16000, 10: 15500, 20: 15000 } },
 ];
