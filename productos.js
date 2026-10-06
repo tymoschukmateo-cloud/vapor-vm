@@ -1,57 +1,20 @@
+// ════════════════════════════════════════════════════════════════════
+//  DATOS DE LA TIENDA — editá este archivo para cambiar productos y precios.
+//  Este archivo es PÚBLICO: no pongas costos ni ganancias acá.
+// ════════════════════════════════════════════════════════════════════
+
+// Número de WhatsApp que recibe los pedidos (código de país + área, sin + ni espacios).
+const WHATSAPP = '5493534171117';
+
+// px: precio POR UNIDAD según cuántas unidades de ese producto lleve el cliente.
+//   1 → de 1 a 4 u. · 5 → de 5 a 9 u. · 10 → de 10 a 19 u. · 20 → 20 u. o más
+// imagen: nombre del archivo dentro de la carpeta img/ (ej: 'ice-king.webp').
+//   Si está vacío se muestra un placeholder.
 const PRODUCTOS = [
-  {
-    id: 'elfbar_ice_king',
-    nom: 'Elfbar Ice King 40K',
-    cat: 'vaper', subcat: 'descartables',
-    costo: 15850,
-    px: { 1: 24000, 5: 22500, 10: 21000, 20: 20000 },
-    img: 'elfbar-ice-king.webp',
-    tag: '40.000 Puffs',
-    desc: 'Descartable premium de la línea Ice King con hasta 40.000 puffs.',
-    stock: 0,
-  },
-  {
-    id: 'vaporesso_xros',
-    nom: 'Vaporesso XROS Pro 2',
-    cat: 'vaper', subcat: 'recargables',
-    costo: 38000,
-    px: { 1: 59000, 5: 55000, 10: 52000, 20: 49000 },
-    img: 'vaporesso-xros.webp',
-    tag: 'Recargable',
-    desc: 'Pod system recargable con pantalla OLED y potencia ajustable hasta 25W.',
-    stock: 1,
-  },
-  {
-    id: 'lost_mary',
-    nom: 'Lost Mary MO20000',
-    cat: 'vaper', subcat: 'descartables',
-    costo: 7700,
-    px: { 1: 14000, 5: 13000, 10: 12000, 20: 11000 },
-    img: 'lost-mary.webp',
-    tag: 'MO20000 Pro',
-    desc: 'Descartable premium con hasta 20.000 puffs y pantalla HD.',
-    stock: 2,
-  },
-  {
-    id: 'cartucho',
-    nom: 'Cartucho Quick Pro',
-    cat: 'vaper', subcat: 'cartuchos',
-    costo: 6200,
-    px: { 1: 11500, 5: 10500, 10: 9800, 20: 9000 },
-    img: 'cartucho.webp',
-    tag: '15000 Puffs',
-    desc: 'Kardinal Quikpro descartable con hasta 15.000 puffs.',
-    stock: 4,
-  },
-  {
-    id: 'quick_pro_kit',
-    nom: 'Quick Pro Kit',
-    cat: 'vaper', subcat: 'semi-recargables',
-    costo: 9200,
-    px: { 1: 16500, 5: 15500, 10: 14500, 20: 13500 },
-    img: 'quick-pro-kit.webp',
-    tag: 'Kit completo',
-    desc: 'Kit completo con dispositivo recargable y pod incluido.',
-    stock: 0,
-  },
+  { id: 'elfbar_ice_king_40000', nombre: 'Elfbar Ice King 40000', imagen: '', px: { 1: 24000, 5: 21500, 10: 21000, 20: 20500 } },
+  { id: 'bc_40k_pro',            nombre: 'BC 40K Pro',            imagen: '', px: { 1: 18000, 5: 16000, 10: 15500, 20: 15000 } },
+  { id: 'elfbar_te30000',        nombre: 'Elfbar TE30000',        imagen: '', px: { 1: 22000, 5: 20000, 10: 19500, 20: 19000 } },
+  { id: 'trio',                  nombre: 'Trio',                  imagen: '', px: { 1: 23000, 5: 19500, 10: 19000, 20: 18500 } },
+  { id: 'funky_lands_ti7000',    nombre: 'Funky Lands Ti7000',    imagen: '', px: { 1: 11000, 5: 9500,  10: 9250,  20: 9000  } },
+  { id: 'pod_kit',               nombre: 'Pod Kit',               imagen: '', px: { 1: 18000, 5: 16000, 10: 15500, 20: 15000 } },
 ];

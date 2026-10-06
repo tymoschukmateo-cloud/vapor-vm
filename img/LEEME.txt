@@ -1,0 +1,5 @@
+Fotos de productos.
+
+1. Guardá la foto acá (ej: ice-king.webp). Ideal: cuadrada, 800x800, formato .webp o .jpg.
+2. En productos.js, poné el nombre del archivo en el campo "imagen" del producto:
+     imagen: 'ice-king.webp',
