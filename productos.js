@@ -6,6 +6,15 @@
 // Número de WhatsApp que recibe los pedidos (código de país + área, sin + ni espacios).
 const WHATSAPP = '5493534171117';
 
+// OFERTA con cuenta regresiva (se muestra arriba de Productos y en la barra superior).
+//   texto:   qué se ofrece, ej: '10% OFF en toda la línea Elfbar'
+//   termina: día en formato 'AAAA-MM-DD'; termina ese día a las 23:59 (hora de Argentina).
+// Cuando la fecha pasa, o si texto queda vacío, la sección se oculta sola.
+const OFERTA = {
+  texto:   '',
+  termina: '',
+};
+
 // px: precio POR UNIDAD según cuántas unidades de ese producto lleve el cliente.
 //   1 → de 1 a 4 u. · 5 → de 5 a 9 u. · 10 → de 10 a 19 u. · 20 → 20 u. o más
 // imagen: nombre del archivo dentro de la carpeta img/ (ej: 'ice-king.webp').
