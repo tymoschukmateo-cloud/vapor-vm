@@ -25,7 +25,7 @@ const OFERTA = {
 // imagen: nombre del archivo dentro de la carpeta img/ (ej: 'ice-king.webp').
 //   Si está vacío se muestra un placeholder.
 const PRODUCTOS = [
-  { id: 'elfbar_ice_king_40000', nombre: 'ELF BAR ICE KING 40K', imagen: '', px: { 1: 24000, 5: 21500, 10: 21000, 20: 20500 } },
+  { id: 'elfbar_ice_king_40000', nombre: 'ELF BAR ICE KING 40K', imagen: 'elf-bar-ice-king-40k.webp', px: { 1: 24000, 5: 21500, 10: 21000, 20: 20500 } },
   { id: 'bc_40k_pro',            nombre: 'ELF BAR EB CREATE BC 40K PRO', imagen: 'elf-bar-eb-create-bc-40k-pro.webp', px: { 1: 18000, 5: 16000, 10: 15500, 20: 15000 } },
   { id: 'elfbar_te30000',        nombre: 'ELF BAR TE 30K', imagen: '', px: { 1: 22000, 5: 20000, 10: 19500, 20: 19000 } },
   { id: 'trio',                  nombre: 'ELF BAR TRIO 40K', imagen: '', px: { 1: 23000, 5: 19500, 10: 19000, 20: 18500 } },
